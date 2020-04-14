@@ -1,0 +1,27 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: onelogin
+    key-store: classpath:keystore.jks
+    key-store-password: secret
+
+okta:
+  metadata-path: https://dev-923570.okta.com/app/exk3h5y2bkgFl6tvV357/sso/saml/metadata
+  sp:
+    host: localhost:8443
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/userdemo
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: root
+  jpa:
+    database_platform: org.hibernate.dialect.PostgreSQLDialect
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      # fixes Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+      hibernate.jdbc.lob.non_contextual_creation: true
